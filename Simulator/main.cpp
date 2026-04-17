@@ -310,7 +310,6 @@ int main()
     GamblerInfo BoldStrategyPlayer { 50 , 0.5 , 1 , 150 } ;
     GamblerInfo MartinGaleStrategyPlayer { 50 , 0.5 , 1 , 150 } ;
     GamblerInfo ForgetfulStrategyPlayer { 50 , 0.5 , 1 , 150 } ;
-    GamblerInfo MathematicalStrategyPlayer { 50 , 0.5 , 1 , 150 } ;
 
     SimulationStatististics data { } ;
 
