@@ -20,7 +20,16 @@ struct SimulationStatististics // 64 bits cpu reads in 8 bytes packets at a time
     int losingRounds { 0 } ;
     int paddingAvoider { 0 } ;
     double winPrecentage { 0.0 } ;
-};
+};// Struct members need reseting
+void freeStruct(SimulationStatististics& stats)
+{
+    stats.balanceAfter = 0.0  ;
+    stats.losingRounds = 0 ;
+    stats.roundsPlayed = 0;
+    stats.winningRounds = 0 ;
+    stats.paddingAvoider = 0 ; // avoiding unwanted memory holding
+    stats.winPrecentage = 0.0 ;
+}
 std::ostream& operator<<( std::ostream& output ,const SimulationStatististics& data)
 {
     output << "After " << data.roundsPlayed << " rounds , your balance is " << data.balanceAfter << '\n' <<"You won " << data.winningRounds << " rounds and lost " << data.losingRounds << '\n' <<"With a win percentage of " << data.winPrecentage << "%\n";
@@ -108,10 +117,6 @@ SimulationStatististics& CoinFlipSimulation( GamblerInfo& Player , BettingMethod
     stats.balanceAfter = PlayerBalance ;
     Player.mutBalance( PlayerBalance ) ;
 
-    #ifdef DEBUG
-    assert( stats.roundsPlayed != 0 ) ;
-    #endif
-
     stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; //Integer division bug
 
     timidstats.close() ;
@@ -165,10 +170,6 @@ SimulationStatististics& CoinFlipSimulation( GamblerInfo& Player , BettingMethod
         }
         stats.balanceAfter = PlayerBalance ;
         Player.mutBalance( PlayerBalance ) ;
-
-    #ifdef DEBUG
-        assert( stats.roundsPlayed != 0 ) ;
-    #endif
 
         stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; //Integer division bug
 
@@ -277,10 +278,6 @@ SimulationStatististics& CoinFlipSimulation( GamblerInfo& Player , BettingMethod
 
         stats.balanceAfter = PlayerBalance ;
         Player.mutBalance( PlayerBalance ) ;
-
-        #ifdef DEBUG
-        assert( stats.roundsPlayed != 0 ) ;
-        #endif
 
         stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; //Integer division bug
 
