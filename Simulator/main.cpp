@@ -4,18 +4,13 @@
 #include <fstream>
 
 #include "RandomGen.h" // DO NOT USE ANYWHERE ( ONLY USE -> Random.h )
-#include "PrimeGen.h"
-
-//#define DEBUG
-#define TODO
 
 enum class BettingMethod
 {
     timid,
     bold,
     martingale,
-    random,
-    primes,
+    random
 };
 struct SimulationStatististics // 64 bits cpu reads in 8 bytes packets at a time ( important for padding )
 {
@@ -302,11 +297,7 @@ SimulationStatististics& CoinFlipSimulation( GamblerInfo& Player , BettingMethod
         return stats ;
 
     }
-    case BettingMethod::primes :
-    {
-
-    }
-    default :
+   default :
         stats.balanceAfter = -1 ;
         stats.losingRounds = -1 ;
         stats.roundsPlayed = -1 ;
@@ -326,29 +317,11 @@ int main()
 
     SimulationStatististics data { } ;
 
-    #ifdef DEBUG
-
-    std::cout << TimidStrategyPlayer.getBalance() << '\n' ;
-    TimidStrategyPlayer.mutBalance( 75 ) ;
-    std::cout << TimidStrategyPlayer.getBalance() << '\n' ;
-    std::cout << TimidStrategyPlayer.getProbability()<< '\n' ;
-    TimidStrategyPlayer.mutPropability( 0.2 ) ;
-    std::cout << TimidStrategyPlayer.getProbability()<< '\n' ;
-    std::cout << TimidStrategyPlayer.getBet() << '\n' ;
-    TimidStrategyPlayer.mutBet( 2 ) ;
-    std::cout << TimidStrategyPlayer.getBet() << '\n' ;
-    std::cout << TimidStrategyPlayer.getGoal() << '\n' ;
-    TimidStrategyPlayer.mutGoal( 225 ) ;
-    std::cout << TimidStrategyPlayer.getGoal() << '\n' ;
-
-    #endif
-
-    //std::cout << CoinFlipSimulation( TimidStrategyPlayer , BettingMethod::timid , data ) ;
-    //std::cout << CoinFlipSimulation( BoldStrategyPlayer , BettingMethod::bold , data ) ;
-    //std::cout << CoinFlipSimulation( MartinGaleStrategyPlayer , BettingMethod::martingale , data ) ;
-    //std::cout << CoinFlipSimulation( ForgetfulStrategyPlayer , BettingMethod::random , data ) ;
-
-    prime::getPrimes(1000) ;
+    //DO NOT CALL IN A LOOP FOR ANY REASON
+    std::cout << CoinFlipSimulation( TimidStrategyPlayer , BettingMethod::timid , data ) ;
+    std::cout << CoinFlipSimulation( BoldStrategyPlayer , BettingMethod::bold , data ) ;
+    std::cout << CoinFlipSimulation( MartinGaleStrategyPlayer , BettingMethod::martingale , data ) ;
+    std::cout << CoinFlipSimulation( ForgetfulStrategyPlayer , BettingMethod::random , data ) ;
 
     return 0;
 
