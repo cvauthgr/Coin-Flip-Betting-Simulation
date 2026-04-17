@@ -316,9 +316,13 @@ int main()
 
     //DO NOT CALL IN A LOOP FOR ANY REASON
     std::cout << CoinFlipSimulation( TimidStrategyPlayer , BettingMethod::timid , data ) ;
+    freeStruct( data ) ;
     std::cout << CoinFlipSimulation( BoldStrategyPlayer , BettingMethod::bold , data ) ;
+    freeStruct( data ) ;
     std::cout << CoinFlipSimulation( MartinGaleStrategyPlayer , BettingMethod::martingale , data ) ;
+    freeStruct( data ) ;
     std::cout << CoinFlipSimulation( ForgetfulStrategyPlayer , BettingMethod::random , data ) ;
+
 
     return 0;
 
