@@ -49,10 +49,22 @@ inline void monteCarloSimulation( std::uint64_t numberOfSimulations )
         }
     };
 
-    std::jthread Timid( callTimid , numberOfSimulations) ;
-    std::jthread Bold( callBold , numberOfSimulations) ;
-    std::jthread Martingale( callMartingale , numberOfSimulations) ;
-    std::jthread Random( callRandom , numberOfSimulations ) ;
+    std::jthread Timid1( callTimid , numberOfSimulations / 4 ) ;
+    std::jthread Timid2( callTimid , numberOfSimulations / 4 ) ;
+    std::jthread Timid3( callTimid , numberOfSimulations / 4 ) ;
+    std::jthread Timid4( callTimid , numberOfSimulations / 4 ) ;
+    std::jthread Bold1( callBold , numberOfSimulations / 4 ) ;
+    std::jthread Bold2( callBold , numberOfSimulations / 4 ) ;
+    std::jthread Bold3( callBold , numberOfSimulations / 4 ) ;
+    std::jthread Bold4( callBold , numberOfSimulations / 4 ) ;
+    std::jthread Martingale1( callMartingale , numberOfSimulations / 4 ) ;
+    std::jthread Martingale2( callMartingale , numberOfSimulations / 4 ) ;
+    std::jthread Martingale3( callMartingale , numberOfSimulations / 4 ) ;
+    std::jthread Martingale4( callMartingale , numberOfSimulations / 4 ) ;
+    std::jthread Random1( callRandom , numberOfSimulations / 4 ) ;
+    std::jthread Random2( callRandom , numberOfSimulations / 4 ) ;
+    std::jthread Random3( callRandom , numberOfSimulations / 4 ) ;
+    std::jthread Random4( callRandom , numberOfSimulations / 4 ) ;
 
 }
 

@@ -8,17 +8,18 @@
 #include "Plotting.h"
 #include "ProgramMode.h"
 
+#include <atomic>
 #include <vector>
 
-std::uint64_t g_timidWins { 0 } ;
-std::uint64_t g_boldWins { 0 } ;
-std::uint64_t g_martingaleWins { 0 } ;
-std::uint64_t g_randomWins { 0 } ;
+std::atomic<std::uint64_t> g_timidWins { 0 } ;
+std::atomic<std::uint64_t> g_boldWins { 0 } ;
+std::atomic<std::uint64_t>g_martingaleWins { 0 } ;
+std::atomic<std::uint64_t> g_randomWins { 0 } ;
 
-std::uint64_t g_timidTotalRounds { 0 } ;
-std::uint64_t g_boldTotalRounds { 0 } ;
-std::uint64_t g_martingaleTotalRounds { 0 } ;
-std::uint64_t g_randomTotalRounds { 0 } ;
+std::atomic<std::uint64_t> g_timidTotalRounds { 0 } ;
+std::atomic<std::uint64_t> g_boldTotalRounds { 0 } ;
+std::atomic<std::uint64_t> g_martingaleTotalRounds { 0 } ;
+std::atomic<std::uint64_t> g_randomTotalRounds { 0 } ;
 
 //We initialize a struct named copyof in StructRelated.h to use them instead of the creation of 5 temp local variables ( functional no - diff  , aesthetic yes )
 
