@@ -7,6 +7,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(GarndpasPensionDemolisherStrategies main.cpp
     RandomGen.h
+    FileHandler.h
+    Plotting.h
+    GamblerInfoClass.h
+    StructRelated.h
+    Enum.h
+    BettingStrategies.h
+    SimulatorEngine.h
+
+
 )
 
 include(GNUInstallDirs)
