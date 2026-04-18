@@ -15,8 +15,15 @@ add_executable(GarndpasPensionDemolisherStrategies main.cpp
     BettingStrategies.h
     SimulatorEngine.h
 
+    MonteCarloWalks.h
+    CasesInfo.h
+    MonteCarloResultsPrint.h
+    ProgramMode.h
+
 
 )
+
+target_compile_options(GarndpasPensionDemolisherStrategies PRIVATE -O3)
 
 include(GNUInstallDirs)
 install(TARGETS GarndpasPensionDemolisherStrategies
