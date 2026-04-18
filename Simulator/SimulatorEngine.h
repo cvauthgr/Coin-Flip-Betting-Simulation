@@ -6,7 +6,7 @@
 #include "Enum.h"
 #include "BettingStrategies.h"
 
-SimulationStatististics& CoinFlipSimulation( GamblerInfo& Player , BettingMethod method , SimulationStatististics& stats) // Implement struct as return type
+inline SimulationStatististics& CoinFlipSimulation( GamblerInfo& Player , BettingMethod method , SimulationStatististics& stats) // Implement struct as return type
 {
     switch( method ) // Should break those as free functions
     {
