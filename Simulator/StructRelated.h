@@ -21,9 +21,9 @@ struct copyof
     double balance { 0.0 } ;
     double goal { 0.0 } ;
     double probability { 0.0 } ;
-    std::vector<double> balanceValues { } ;
+    std::vector<double> balanceValues { } ; // Let the compliler handle padding this time -Terry Davis
 
-    copyof( const GamblerInfo& Player )
+    copyof( const GamblerInfo& Player ) // Public copy constructor
         : bet { Player.getBet() } ,
           balance { Player.getBalance()} ,
           goal { Player.getGoal() } ,
@@ -32,7 +32,7 @@ struct copyof
 
     }
 };
-inline void freeStruct(SimulationStatististics& stats)
+inline void freeStruct(SimulationStatististics& stats) // Reset the struct so no values accumulate
 {
     stats.balanceAfter = 0.0  ;
     stats.losingRounds = 0 ;
