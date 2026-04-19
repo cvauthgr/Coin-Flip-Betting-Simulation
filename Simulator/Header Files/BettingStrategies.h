@@ -21,9 +21,6 @@ std::atomic<std::uint64_t> g_boldTotalRounds { 0 } ;
 std::atomic<std::uint64_t> g_martingaleTotalRounds { 0 } ;
 std::atomic<std::uint64_t> g_randomTotalRounds { 0 } ;
 
-//We initialize a struct named copyof in StructRelated.h to use them instead of the creation of 5 temp local variables 
-// Most changes commented out to assist with speed in the multithreading and not overload the RAM ( should just define a Macro Multi-Threading)
-
 inline SimulationStatististics& timidStrategy( GamblerInfo& Player , SimulationStatististics& stats )
 {
     copyof playerData { Player } ;
