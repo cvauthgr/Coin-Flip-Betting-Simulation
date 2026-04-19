@@ -7,7 +7,7 @@ I implemented a simple coin flip betting simulator engine in C++23
 >[!CAUTION]
 >This version is incomplete and unsafe , don't rely on any of it's parts for anything you make
 
-##What this program does
+## What this program does
 
 `( For anyone wondering , no , this program won't help you become a millionaire by backtesting your favorite coin flip gambling strategy ) `
 
@@ -16,7 +16,7 @@ In it's core the program is fairly simple and has two modes
 1) Mode 1 : Monothreading
 2) Mode 2 : Multithreading 
 
-###How to switch between modes 
+### How to switch between modes 
 
 First navigate to the `ProgramMode.h` header file and uncomment the mode you want the program to execute in 
 
