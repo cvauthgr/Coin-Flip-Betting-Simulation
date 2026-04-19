@@ -9,6 +9,45 @@ I implemented a simple coin flip betting simulator engine in C++23
 >[!CAUTION]
 >This version is incomplete and unsafe (memory safety, numerical accuracy, thread safety), don't rely on any of it's parts for anything you make
 
+#How to run it 
+
+Step 1 : Make a file called `CoinFlipSimulator`
+Step 2 : Inside this file put all the `.h` files and the `.cpp` file
+Step 3 : Inside the `CoinFlipSimulator` put the `CMakeLists.txt` file provided 
+
+>[!Important]
+>The `CMakeLists.txt` needs to be inside `CoinFlipSimulator`
+
+Step 4 : Install GCC (Well good luck with that) [Tutorial on installing GCC](https://phoenixnap.com/kb/install-gcc-windows)
+Step 5 : Install Gnuplot [Tutorial on installing Gnuplot](https://riptutorial.com/gnuplot/example/11275/installation-or-setup)
+
+If installation was succesful in a powershell this should be what you see
+
+<img width="916" height="174" alt="Screenshot 2026-04-19 201849" src="https://github.com/user-attachments/assets/749ef345-eda1-447a-ab93-d649c2d04dd0" />
+
+Step 6 : On a powershell terminal execute these commands **one at a time**
+
+For Windows :
+
+```
+
+cd "The files path ex C:\Users\John\Desktop\CoinFlipSimulator"
+cmake -B build -G "MinGW Makefiles"
+cmake --build build
+build\GarndpasPensionDemolisherStrategies.exe
+
+```
+
+For Linux :
+
+```
+cd CoinFlipSimulator
+cmake -B build
+cmake --build build
+./build/GarndpasPensionDemolisherStrategies
+
+```
+
 ## What this program does
 
 `For anyone wondering , no , this program won't help you become a millionaire by backtesting your favorite coin flip gambling strategy`
@@ -309,4 +348,69 @@ Gnuplot is fed the data from the `.txt` file and produces a plot which stays on 
 
 # The Monte Carlo capabilities of the engine 
 
-Inside the file `
+Inside the file `MonteCarloWalks.h` we find the function `monteCarloSimulation()` which takes as its only input a `std::uint64_t integer` to simulate to the desired number of iterations 
+
+>[!Important}
+>The number of iterations is not per strategy but affects all strategies simulateously
+
+Example 
+
+In main if we call
+
+```
+monteCarloSimulations(1000) ;
+```
+
+Every strategy we have implemented will run 1000 times ( 250 times in each thread in this specific case ) and return the results (if we use `monteCarloResults()`
+
+## The body of `monteCarloSimulation()`
+
+This function relies on the creation of 16 threads that each call a predifines lambda which call the respecting betting strategy function N times 
+
+The lambdas are defines inside the `monteCarloSimulation()` body here : 
+
+```
+auto callTimid = []( std::uint64_t numberOfSimulations )
+    {
+        for( std::uint64_t index = 0 ; index < numberOfSimulations ; ++ index)
+        {
+            timidStrategy(TimidStrategyPlayer , data ) ;
+            freeStruct( data ) ;
+        }
+    };
+    auto callBold = []( std::uint64_t numberOfSimulations )
+    {
+        for( std::uint64_t index = 0 ; index < numberOfSimulations ; ++ index)
+        {
+            boldStrategy(BoldStrategyPlayer , data ) ;
+            freeStruct( data ) ;
+        }
+    };
+    auto callMartingale = []( std::uint64_t numberOfSimulations )
+    {
+        for( std::uint64_t index = 0 ; index < numberOfSimulations ; ++ index)
+        {
+            martingaleStrategy( MartinGaleStrategyPlayer , data ) ;
+            freeStruct( data ) ;
+        }
+    };
+    auto callRandom = []( std::uint64_t numberOfSimulations )
+    {
+        for( std::uint64_t index = 0 ; index < numberOfSimulations ; ++ index)
+        {
+            randomBetsStrategy(ForgetfulStrategyPlayer , data ) ;
+            freeStruct( data ) ;
+        }
+    };
+```
+
+Lastly but extremely important is the use of `std::atomic` on the global variables that `monteCarloResults()`  uses to print out our results , although it looks unimportant it helps solve thread racing for the same variable to write to
+
+>[!Tip]
+>The `monteCarloResults()` function is pretty straightforward and easy to understand so i won't explain here how it works 
+
+# The functions of our betting strategies 
+
+Inside `BettingStrategies.h` exist our betting strategies functions , take a mental note of this location because it will become useful later 
+
+# How to add YOUR OWN strategies (Experimental)
