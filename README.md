@@ -244,7 +244,7 @@ graph TD
     I --> J[monteCarloResults Output]
 ```
     
-### The functions `writeToFile()` , `plot` and the convencience of using gnuplot
+### The functions `writeToFile()` , `plot()` and the convencience of using gnuplot
 
 In their respecting files `FileHandler.h` and `Plotting.h` we can find (excluding the error handling functions) two new functions which are operating in the background bu
 give us huge side effects 
