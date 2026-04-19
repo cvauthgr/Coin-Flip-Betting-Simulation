@@ -139,7 +139,7 @@ inline SimulationStatististics& martingaleStrategy( GamblerInfo& Player , Simula
         else if( playerData.bet*2 <= playerData.balance )
         {
             playerData.balance -= playerData.bet ;
-            //stats.losingRounds += 1 ;
+            stats.losingRounds += 1 ;
             playerData.bet *= 2 ;
         }
         else
