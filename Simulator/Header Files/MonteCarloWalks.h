@@ -8,12 +8,6 @@
 #include "CasesInfo.h"
 #include "MonteCarloResultsPrint.h"
 
-/*Initialize the threads with their respective functions
- std::ref is needed because std::jthread tries to bind the arguments provided
-to rvalues which is impossible for types like the ones i have created ( ex. SimulationStatistics )
-std::ref unpacks as an rvalue the argument and then when it is of use to the function
-it turns it back to the non-const lvalue it needs (as far as i understand) */
-
 inline void monteCarloSimulation( std::uint64_t numberOfSimulations )
 {
     auto callTimid = []( std::uint64_t numberOfSimulations )
