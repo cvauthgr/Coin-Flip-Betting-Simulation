@@ -3,7 +3,7 @@
 
 #include "StructRelated.h"
 #include "GamblerInfoClass.h"
-#include "RandomGen.h" // DO NOT USE ANYWHERE ( ONLY USE -> Random.h )
+#include "RandomGen.h" 
 #include "FileHandler.h"
 #include "Plotting.h"
 #include "ProgramMode.h"
@@ -21,10 +21,7 @@ std::atomic<std::uint64_t> g_boldTotalRounds { 0 } ;
 std::atomic<std::uint64_t> g_martingaleTotalRounds { 0 } ;
 std::atomic<std::uint64_t> g_randomTotalRounds { 0 } ;
 
-//We initialize a struct named copyof in StructRelated.h to use them instead of the creation of 5 temp local variables ( functional no - diff  , aesthetic yes )
-
-//Well idiot Gambler info has a copy constructor -2 hours
-
+//We initialize a struct named copyof in StructRelated.h to use them instead of the creation of 5 temp local variables 
 // Most changes commented out to assist with speed in the multithreading and not overload the RAM ( should just define a Macro Multi-Threading)
 
 inline SimulationStatististics& timidStrategy( GamblerInfo& Player , SimulationStatististics& stats )
@@ -54,7 +51,7 @@ inline SimulationStatististics& timidStrategy( GamblerInfo& Player , SimulationS
     stats.balanceAfter = playerData.balance ;
     Player.mutBalance( playerData.balance ) ;
 
-    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; //Integer division bug
+    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; 
 
     writeToFile( playerData.balanceValues , "timidstats.txt") ;
 
@@ -104,7 +101,7 @@ inline SimulationStatististics& boldStrategy( GamblerInfo& Player , SimulationSt
     stats.balanceAfter = playerData.balance ;
     Player.mutBalance( playerData.balance ) ;
 
-    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; //Integer division bug
+    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ;
 
     writeToFile( playerData.balanceValues , "boldstats.txt") ;
 
@@ -153,11 +150,11 @@ inline SimulationStatististics& martingaleStrategy( GamblerInfo& Player , Simula
     stats.balanceAfter = playerData.balance ;
     Player.mutBalance( playerData.balance ) ;
 
-    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; //Integer division bug
+    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; 
 
     writeToFile( playerData.balanceValues , "martingalestats.txt" ) ;
 
-    plot( "martingalestats.txt" , "Martingale" ) ; // Should make it a free function
+    plot( "martingalestats.txt" , "Martingale" ) ;
     #endif
 
     #ifdef MULTITHREADING
@@ -175,7 +172,7 @@ inline SimulationStatististics& randomBetsStrategy( GamblerInfo& Player , Simula
     {
 
         while( playerData.balance + playerData.bet > playerData.goal )
-            playerData.bet = random::getReal( 0.0 , playerData.balance ) ; //Both need to be doubles ( random.h still needs refactoring)
+            playerData.bet = random::getReal( 0.0 , playerData.balance ) ;
 
         if( random::getReal( 0.0 , 1.0 ) <= playerData.probability )
         {
@@ -200,11 +197,11 @@ inline SimulationStatististics& randomBetsStrategy( GamblerInfo& Player , Simula
     stats.balanceAfter = playerData.balance ;
     Player.mutBalance( playerData.balance ) ;
 
-    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; //Integer division bug
+    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; 
 
     writeToFile( playerData.balanceValues , "randombetting.txt" ) ;
 
-    plot( "randombetting.txt" , "RandomBets" ) ; // Should make it a free function
+    plot( "randombetting.txt" , "RandomBets" ) ; 
     #endif
 
     #ifdef MULTITHREADING
