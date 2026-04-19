@@ -169,24 +169,22 @@ We pass two class objects by reference to avoid expensive copies and an enumerat
 
  In reality what happens is :
 
-<pre>
-    graph TD
-    A[main.cpp] --&gt; B{Program Mode?}
-    B --&gt;|MONOTHREADING| C[CoinFlipSimulation]
-    B --&gt;|MULTITHREADING| D[monteCarloSimulation]
+graph TD
+    A[main.cpp] --> B{Program Mode?}
+    B -->|MONOTHREADING| C[CoinFlipSimulation]
+    B -->|MULTITHREADING| D[monteCarloSimulation]
     
-    C --&gt; E{Betting Method}
-    E --&gt;|Timid| F[Strategy Logic]
-    E --&gt;|Bold| F
-    E --&gt;|Martingale| F
-    E --&gt;|Random| F
+    C --> E{Betting Method}
+    E -->|Timid| F[Strategy Logic]
+    E -->|Bold| F
+    E -->|Martingale| F
+    E -->|Random| F
     
-    F --&gt; G[writeToFile]
-    G --&gt; H[gnuplot Visualization]
+    F --> G[writeToFile]
+    G --> H[gnuplot Visualization]
     
-    D --&gt; I[Threaded Strategy Loops]
-    I --&gt; J[monteCarloResults Output]
-<pre>
+    D --> I[Threaded Strategy Loops]
+    I --> J[monteCarloResults Output]
     
 ### The functions writeToFile,plot and the convencience of using gnuplot
 
