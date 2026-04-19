@@ -55,4 +55,61 @@ In the file `BettingStrats` i have implemented 4 betting strategies the user of 
 
 ## The `RandomGen.h` file 
 
+In the core of this program lies a simple function template . Navigating to the `RandomGen.h` header file we see at the bottom :
+
+```
+template < typename T > 
+inline T getReal(T min , T max)
+{
+    return std::uniform_real_distribution<T>{ min , max }(mt) ;
+}
+```
+
+This inline function template is vital for the execution of our simulations
+
+-> Inline guarantees that in every `.cpp` file there will be only one instance of our function to avoid violation of the ODR 
+
+-> Using the template we can input arguments of the same floating data type (only tested for floating fundamental data types [C++ Fundamental Data Types(https://en.cppreference.com/cpp/language/types)) in a logical order and receive a pseudorandom random 64 bit number inbetween those two parameters we gave the `getReal()` function (inclusive) . We use the pseudo random number generator mersenne twister [C++ Mersenne Twister](https://en.cppreference.com/cpp/numeric/random/mersenne_twister_engine)
+and we seed it at the start of each coal to the `getReal()` function with a std::random_device type number form the OS [Pseudorandom Numbers Coming From The OS](https://en.cppreference.com/cpp/numeric/random/random_device) . Cpp reference gives a very good example on that exact thing .
+
+->The return type matches the function parameters and by using `return std::uniform_real_distribution<T>` we ensure that each number appears with the same frequency . Although in the specific program we will never see a repeating number as this prng has a range of 0 - 2^19937 - 1 [Mersenne Twister 64 bit Range -  Characteristics Section](https://en.wikipedia.org/wiki/Mersenne_Twister)
+
+### Examples
+
+In main we can call 
+
+```
+std::cout << getReal( 1.0 , 10.0 ) ; // Each number must be of floating data type
+```
+
+And we receive : `9.56512` which is valid
+
+If we try to call
+
+```
+std::cout << getReal( 1 , 10 ) ;
+```
+We get 
+
+```
+ERROR!
+In file included from /usr/local/include/c++/14.2.0/random:48,
+                 from /tmp/V71X4w0gMq/main.cpp:1:
+/usr/local/include/c++/14.2.0/bits/random.h: In instantiation of 'class std::uniform_real_distribution<int>':
+/tmp/V71X4w0gMq/main.cpp:20:58:   required from 'T rnd::getReal(T, T) [with T = int]'
+   20 |     return std::uniform_real_distribution<T>{ min , max }(mt) ;
+      |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+/tmp/V71X4w0gMq/main.cpp:28:30:   required from here
+   28 |     std::cout << rnd::getReal( 1 , 10 ) ;
+      |                  ~~~~~~~~~~~~^~~~~~~~~~
+/usr/local/include/c++/14.2.0/bits/random.h:1883:56: error: static assertion failed: result_type must be a floating point type
+ 1883 |       static_assert(std::is_floating_point<_RealType>::value,
+      |                                                        ^~~~~
+/usr/local/include/c++/14.2.0/bits/random.h:1883:56: note: 'std::integral_constant<bool, false>::value' evaluates to false
+
+```
+Because regardless that our function can accept both integral values `std::uniform_real_distribution<T>` only accepts floating data types as valid template parameters 
+
+A simple fix is changing it to `std::uniform_int_distribution<T>` but then the function will accept only integral type parameters 
+
 
