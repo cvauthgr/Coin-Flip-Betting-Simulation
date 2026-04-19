@@ -14,7 +14,7 @@ I implemented a simple coin flip betting simulator engine in C++23
 In it's core the program is fairly simple and has two modes 
 
 1) Mode 1 : Monothreading
-2) Mode 2 : Multithreading 
+2) Mode 2 : Multithreading (` Take that GIL `)
 
 ### How to switch between modes 
 
@@ -152,5 +152,27 @@ Lets initialize a martingale strategy player which starts with :
 >[!Warning]
 >Do not initialize a new class object just change the existing values from the simualtion object you want to initiate found in the `CasesInfo.h` header file
 
-#The CoinFlipSimulation function
+### The CoinFlipSimulation function
 
+The function `CoinFlipSimulation()` is responsible for initializing the the monothreading simulation process 
+
+We can pass 3 arguments :
+1) The player's info
+2) The betting method we want to simulate
+3) The struct we want to return to receive the results of our simulation
+
+On the more technical side : `inline SimulationStatististics& CoinFlipSimulation( GamblerInfo& Player , BettingMethod method , SimulationStatististics& stats)` this is our simulator in it's true form 
+
+We pass two class objects by reference to avoid expensive copies and an enumerator from an enum class ( located in the `Enum.h` header file ) to select another function to be called by our function to initialize the simulation!
+
+`python devs in sambles right now (joke!!!) ` 
+
+ In reality what happens is :
+
+ _start -> main -> CoinFlipSimulation -> NameOfBettingStrategy -> writeToFile -> plot -> _end
+
+ ### The functions writeToFile,plot and the convencience of using gnuplot
+
+ In their respecting files `FileHandler.h` and `Plotting.h` we can find (excluding the error handling functions) two new functions which are operating in the background but give us huge side effects 
+
+ writeToFile
