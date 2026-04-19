@@ -6,9 +6,9 @@
 #include "Enum.h"
 #include "BettingStrategies.h"
 
-inline SimulationStatististics& CoinFlipSimulation( GamblerInfo& Player , BettingMethod method , SimulationStatististics& stats) // Implement struct as return type
+inline SimulationStatististics& CoinFlipSimulation( GamblerInfo& Player , BettingMethod method , SimulationStatististics& stats) 
 {
-    switch( method ) // Should break those as free functions
+    switch( method ) 
     {
 
     case BettingMethod::timid : return timidStrategy( Player , stats ) ;
