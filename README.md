@@ -169,10 +169,8 @@ std::cout << CoinFlipSimulation( ForgetfulStrategyPlayer , random , data ) ;
 And that is it !
 
 >[!Important]
->For now StrategyNamePlayer can only be : 1)TimidStrategyPlayer     and NameOfStrategy can only be : 1)timid
->                                         2)BoldStrategyPlayer                                       2)bold
->                                         3)MartingaleStrategyPlayer                                 3)martingale
->                                         4)ForgetfulStrategyPlayer                                  4)random
+>For now StrategyNamePlayer can only be : TimidStrategyPlayer , BoldStrategyPlayer , MartingaleStrategyPlayer  and  ForgetfulStrategyPlayer and NameOfStrategy can only be :
+>timid ,bold , martingale and random
 
 # Multithreading Simulations
 
