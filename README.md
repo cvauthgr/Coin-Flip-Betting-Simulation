@@ -67,13 +67,13 @@ inline T getReal(T min , T max)
 
 This inline function template is vital for the execution of our simulations
 
--> Inline guarantees that in every `.cpp` file there will be only one instance of our function to avoid violation of the ODR 
+->inline allows multiple identical definitions across translation units without violating the One Definition Rule.
 
--> Using the template we can input arguments of the same floating data type (only tested for floating fundamental data types [C++ Fundamental Data Types(https://en.cppreference.com/cpp/language/types)) in a logical order and receive a pseudorandom random 64 bit number inbetween those two parameters we gave the `getReal()` function (inclusive) . We use the pseudo random number generator mersenne twister 
+-> Using the template we can input arguments of the same floating data type (only tested for floating fundamental data types [C++ Fundamental Data Types(https://en.cppreference.com/cpp/language/types)) in a logical order and receive a pseudorandom random 64 bit number inbetween those two parameters we gave the `getReal()` function (in  [a , b)) . We use the pseudo random number generator mersenne twister 
 [C++ Mersenne Twister](https://en.cppreference.com/cpp/numeric/random/mersenne_twister_engine)
-and we seed it at the start of each coal to the `getReal()` function with a std::random_device type number form the OS [Pseudorandom Numbers Coming From The OS](https://en.cppreference.com/cpp/numeric/random/random_device) . Cpp reference gives a very good example on that exact thing .
+and we seed it once when `getReal()` is first called with a std::random_device type number form the OS [Pseudorandom Numbers Coming From The OS](https://en.cppreference.com/cpp/numeric/random/random_device) . Cpp reference gives a very good example on that exact thing .
 
-->The return type matches the function parameters and by using `return std::uniform_real_distribution<T>` we ensure that each number appears with the same frequency . Although in the specific program we will never see a repeating number as this prng has a range of 0 - 2^19937 - 1 [Mersenne Twister 64 bit Range -  Characteristics Section](https://en.wikipedia.org/wiki/Mersenne_Twister)
+->The return type matches the function parameters and by using `return std::uniform_real_distribution<T>` we ensure that each number appears with the same frequency . Although in the specific program we will never see a repeating number for 0 - 2^19937 - 1 repetions [Mersenne Twister 64 bit Range -  Characteristics Section](https://en.wikipedia.org/wiki/Mersenne_Twister)
 
 ### Examples
 
@@ -308,3 +308,5 @@ This is a very simple `inline` and `void` return type function which passes to t
 Gnuplot is fed the data from the `.txt` file and produces a plot which stays on screen after the completion of the program.
 
 # The Monte Carlo capabilities of the engine 
+
+Inside the file `
