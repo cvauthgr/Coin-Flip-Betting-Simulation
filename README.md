@@ -169,15 +169,26 @@ We pass two class objects by reference to avoid expensive copies and an enumerat
 
  In reality what happens is :
 
-graph LR
-    A[main.cpp] --> B(CoinFlipSimulation)
-    B --> C{Betting Strategy}
-    C -->|Timid| D[Strategy Logic]
-    C -->|Bold| D
-    D --> E[writeToFile]
-    E --> F[Gnuplot Visualization]
-
- ### The functions writeToFile,plot and the convencience of using gnuplot
+<pre>
+    graph TD
+    A[main.cpp] --&gt; B{Program Mode?}
+    B --&gt;|MONOTHREADING| C[CoinFlipSimulation]
+    B --&gt;|MULTITHREADING| D[monteCarloSimulation]
+    
+    C --&gt; E{Betting Method}
+    E --&gt;|Timid| F[Strategy Logic]
+    E --&gt;|Bold| F
+    E --&gt;|Martingale| F
+    E --&gt;|Random| F
+    
+    F --&gt; G[writeToFile]
+    G --&gt; H[gnuplot Visualization]
+    
+    D --&gt; I[Threaded Strategy Loops]
+    I --&gt; J[monteCarloResults Output]
+<pre>
+    
+### The functions writeToFile,plot and the convencience of using gnuplot
 
  In their respecting files `FileHandler.h` and `Plotting.h` we can find (excluding the error handling functions) two new functions which are operating in the background but give us huge side effects 
 
