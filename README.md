@@ -113,7 +113,7 @@ Because regardless that our function can accept both integral values `std::unifo
 
 A simple fix is changing it to `std::uniform_int_distribution<T>` but then the function will accept only integral type parameters 
 
-# How to run YOUR simulations using this program
+# How to run YOUR simulations using this program (MONOTHREADING ONLY)
 
 ## Step 1 : Configurating each players data 
 
@@ -152,7 +152,63 @@ Lets initialize a martingale strategy player which starts with :
 >[!Warning]
 >Do not initialize a new class object just change the existing values from the simualtion object you want to initiate found in the `CasesInfo.h` header file
 
-### The CoinFlipSimulation function
+## Step 2 : Calling your desired betting strategy simulation
+
+In main :
+
+```
+std::cout <<  CoinFlipSimulation( StrategyNamePlayer , NameOStrategy , data -> This should always be data) ;
+```
+Example 
+
+```
+std::cout << CoinFlipSimulation( ForgetfulStrategyPlayer , random , data ) ;
+
+```
+
+And that is it !
+
+>[!Important]
+>For now StrategyNamePlayer can only be : 1)TimidStrategyPlayer     and NameOfStrategy can only be : 1)timid
+>                                         2)BoldStrategyPlayer                                       2)bold
+>                                         3)MartingaleStrategyPlayer                                 3)martingale
+>                                         4)ForgetfulStrategyPlayer                                  4)random
+
+# Multithreading Simulations
+
+In Multithreading sadly the only change that can be made is the number of simulations for all strategies by using the `monteCarloSimualtion()` function to execute the simulation and the `monteCarloResults()` function to print the results to the user
+
+In main :
+
+```
+monteCarloSimulation( NumberOfSimualations );
+monteCarloResults() ; // To get the results
+```
+
+Example 
+
+```
+monteCarloSimulation( 1000 ); // 1000 calls to each simulation function
+monteCarloResults() ;
+```
+when 
+```
+inline GamblerInfo TimidStrategyPlayer { 50 , 0.5 , 1 , 150 } ;
+inline GamblerInfo BoldStrategyPlayer { 50 , 0.5 , 1 , 150 } ;
+inline GamblerInfo MartinGaleStrategyPlayer { 50 , 0.5 , 1 , 150 } ;
+inline GamblerInfo ForgetfulStrategyPlayer { 50 , 0.5 , 1 , 150 } ;
+```
+
+Which returns 
+
+```
+Timid strategy with a win rate of 24.0952
+Bold strategy with a win rate of 38.7003
+Martingale strategy with a win rate of 31.2709
+Random strategy with a win rate of 23.1025
+```
+
+# The CoinFlipSimulation function
 
 The function `CoinFlipSimulation()` is responsible for initializing the the monothreading simulation process 
 
@@ -193,4 +249,62 @@ graph TD
 In their respecting files `FileHandler.h` and `Plotting.h` we can find (excluding the error handling functions) two new functions which are operating in the background bu
 give us huge side effects 
 
-writeToFile
+writeToFile : in `FileHandler` we find this 
+
+```
+inline void writeToFile( const std::vector<double>& balanceValues , const std::string& fileName ) //std::ofstream can't be const( we write to it)
+{
+    std::ofstream objectFileName ;
+
+    objectFileName.open(fileName) ; //Open the provided object file with the chose name
+
+    if(isFileOpen(objectFileName))
+    {
+        for( int index = 0 ; index < std::ssize( balanceValues ) ; ++ index )
+        {
+            objectFileName << balanceValues[ index ] << '\n' ;
+        }
+
+        objectFileName.close() ;
+
+    }
+    else
+        errorOpeningTheFile(fileName) ;
+}
+```
+
+This function takes as input a `const std::vector` by reference and the name of a file . The function then using an object of type `std::ofstream`
+[std::ofstream C++](https://en.cppreference.com/cpp/io/basic_ofstream) writes every change of balance in a .`txt` file with the name we specified . This function although primitive implements open file error checking routines using the `isFileOpen() bool return type` function which is irrelevant to our goal ( you can easily read it and understand its structure)
+
+Throughout the execution of the different strategies we can find this line 
+
+```
+playerData.balanceValues.push_back(playerData.balance);
+```
+
+With that we are then able to pass this vector to our `writeToFile()` to save in the specified `.txt` file with the name we provided
+
+plot : in `Plotting.h` we find this 
+
+```
+inline void plot(const std::string& fileName ,const std::string& plotTitle) // C-Style string concatenation (exceptional & this->C)
+{
+    std::string gnuplotCommand = "gnuplot -persistent -e \""
+                                 "set object 1 rectangle from screen 0,0 to screen 1,1 fillcolor rgb 'black' behind;"
+                                 " set border lc rgb 'white'; "
+                                 "set xtics tc rgb 'white'; "
+                                 "set ytics tc rgb 'white'; "
+                                 "set key tc rgb 'white'; "
+                                 "plot '"+fileName+"' with lines lc rgb 'red' title '"+plotTitle+"'\"";
+
+    system(gnuplotCommand.c_str());
+}
+```
+
+This is a very simple `inline` and `void` return type function which passes to the system a `gnuplot` command with that `.txt` file we need plotted and the title of the plot
+
+`The usefulness of gnuplot can only be appreciated after trying to set up `ImPlot` for one of your projects`
+
+Gnuplot is fed the data from the `.txt` file and produces a plot which stays on screen after the completion of the program.
+
+# The Monte Carlo capabilities of the engine 
