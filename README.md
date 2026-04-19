@@ -9,7 +9,7 @@ I implemented a simple coin flip betting simulator engine in C++23
 >[!CAUTION]
 >This version is incomplete and unsafe (memory safety, numerical accuracy, thread safety), don't rely on any of it's parts for anything you make
 
-#How to run it 
+# How to run it 
 
 Step 1 : Make a file called `CoinFlipSimulator`
 Step 2 : Inside this file put all the `.h` files and the `.cpp` file
