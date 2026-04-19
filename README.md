@@ -69,7 +69,8 @@ This inline function template is vital for the execution of our simulations
 
 -> Inline guarantees that in every `.cpp` file there will be only one instance of our function to avoid violation of the ODR 
 
--> Using the template we can input arguments of the same floating data type (only tested for floating fundamental data types [C++ Fundamental Data Types(https://en.cppreference.com/cpp/language/types)) in a logical order and receive a pseudorandom random 64 bit number inbetween those two parameters we gave the `getReal()` function (inclusive) . We use the pseudo random number generator mersenne twister [C++ Mersenne Twister](https://en.cppreference.com/cpp/numeric/random/mersenne_twister_engine)
+-> Using the template we can input arguments of the same floating data type (only tested for floating fundamental data types [C++ Fundamental Data Types(https://en.cppreference.com/cpp/language/types)) in a logical order and receive a pseudorandom random 64 bit number inbetween those two parameters we gave the `getReal()` function (inclusive) . We use the pseudo random number generator mersenne twister 
+[C++ Mersenne Twister](https://en.cppreference.com/cpp/numeric/random/mersenne_twister_engine)
 and we seed it at the start of each coal to the `getReal()` function with a std::random_device type number form the OS [Pseudorandom Numbers Coming From The OS](https://en.cppreference.com/cpp/numeric/random/random_device) . Cpp reference gives a very good example on that exact thing .
 
 ->The return type matches the function parameters and by using `return std::uniform_real_distribution<T>` we ensure that each number appears with the same frequency . Although in the specific program we will never see a repeating number as this prng has a range of 0 - 2^19937 - 1 [Mersenne Twister 64 bit Range -  Characteristics Section](https://en.wikipedia.org/wiki/Mersenne_Twister)
@@ -112,4 +113,44 @@ Because regardless that our function can accept both integral values `std::unifo
 
 A simple fix is changing it to `std::uniform_int_distribution<T>` but then the function will accept only integral type parameters 
 
+# How to run YOUR simulations using this program
+
+## Step 1 : Configurating each players data 
+
+To set each strategies simulation parameters we move to the `CasesInfo.h` header file .
+
+There we can see 4 class objects :
+
+```
+inline GamblerInfo TimidStrategyPlayer { 50 , 0.5 , 1 , 150 } ; // Timid strategy
+inline GamblerInfo BoldStrategyPlayer { 50 , 0.5 , 1 , 150 } ; //Bold strategy 
+inline GamblerInfo MartinGaleStrategyPlayer { 50 , 0.5 , 1 , 150 } ; // Martingale strategy
+inline GamblerInfo ForgetfulStrategyPlayer { 50 , 0.5 , 1 , 150 } ; // Random betting strategy
+```
+
+Each is corresponding to a specific strategy as depicted by the respecting comments
+
+To change each simulation's parameters we change the values of the objects above according to this template 
+
+```
+StrategyNamePlayer { StartingBalance , PropabilityOfWinningTheCoinFlip , InitialBet , Goal }
+```
+
+All parameters are of type `double` so they should not exceed values outside the range of  2.22507e-308 to 1.79769e+308
+
+### Example 
+
+Lets initialize a martingale strategy player which starts with :
+
+1) 100 $ 
+2) Has an edge against the house P = 0.51
+3) Bets start at 25 $
+4) Wants to 10x his initial capital so 1000$ goal
+
+`inline GamblerInfo MartingaleStrategyPlayer { 100 , 0.51 , 25 , 1000 } ; `
+
+>[!Warning]
+>Do not initialize a new class object just change the existing values from the simualtion object you want to initiate found in the `CasesInfo.h` header file
+
+#The CoinFlipSimulation function
 
