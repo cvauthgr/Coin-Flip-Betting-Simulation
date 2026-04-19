@@ -3,7 +3,7 @@
 
 #include "StructRelated.h"
 #include "GamblerInfoClass.h"
-#include "RandomGen.h" 
+#include "RandomGen.h"
 #include "FileHandler.h"
 #include "Plotting.h"
 #include "ProgramMode.h"
@@ -48,7 +48,7 @@ inline SimulationStatististics& timidStrategy( GamblerInfo& Player , SimulationS
     stats.balanceAfter = playerData.balance ;
     Player.mutBalance( playerData.balance ) ;
 
-    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; 
+    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ;
 
     writeToFile( playerData.balanceValues , "timidstats.txt") ;
 
@@ -56,8 +56,14 @@ inline SimulationStatististics& timidStrategy( GamblerInfo& Player , SimulationS
     #endif
 
     #ifdef MULTITHREADING
+
+    if(playerData.balance == playerData.goal) // Only account for succesful simulations where we achieved our goal
+    {
+        g_timidWins += stats.winningRounds ;
+    }
+
     g_timidTotalRounds += stats.roundsPlayed ;
-    g_timidWins += stats.winningRounds ;
+
     #endif
 
     return stats ;
@@ -106,8 +112,14 @@ inline SimulationStatististics& boldStrategy( GamblerInfo& Player , SimulationSt
     #endif
 
     #ifdef MULTITHREADING
+
+    if(playerData.balance == playerData.goal)
+    {
+        g_boldWins += stats.winningRounds ;
+    }
+
     g_boldTotalRounds += stats.roundsPlayed ;
-    g_boldWins += stats.winningRounds ;
+
     #endif
 
     return  stats;
@@ -147,7 +159,7 @@ inline SimulationStatististics& martingaleStrategy( GamblerInfo& Player , Simula
     stats.balanceAfter = playerData.balance ;
     Player.mutBalance( playerData.balance ) ;
 
-    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; 
+    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; //Integer division bug caught
 
     writeToFile( playerData.balanceValues , "martingalestats.txt" ) ;
 
@@ -155,8 +167,14 @@ inline SimulationStatististics& martingaleStrategy( GamblerInfo& Player , Simula
     #endif
 
     #ifdef MULTITHREADING
+
+    if(playerData.balance == playerData.goal)
+    {
+        g_martingaleWins += stats.winningRounds ;
+    }
+
     g_martingaleTotalRounds += stats.roundsPlayed ;
-    g_martingaleWins += stats.winningRounds ;
+
     #endif
 
     return stats ;
@@ -194,19 +212,26 @@ inline SimulationStatististics& randomBetsStrategy( GamblerInfo& Player , Simula
     stats.balanceAfter = playerData.balance ;
     Player.mutBalance( playerData.balance ) ;
 
-    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ; 
+    stats.winPrecentage = ( 100.0 * stats.winningRounds ) / stats.roundsPlayed ;
 
     writeToFile( playerData.balanceValues , "randombetting.txt" ) ;
 
-    plot( "randombetting.txt" , "RandomBets" ) ; 
+    plot( "randombetting.txt" , "RandomBets" ) ;
     #endif
 
     #ifdef MULTITHREADING
+
+    if(playerData.balance == playerData.goal)
+    {
+        g_randomWins += stats.winningRounds ;
+    }
+
     g_randomTotalRounds += stats.roundsPlayed ;
-    g_randomWins += stats.winningRounds ;
+
     #endif
 
     return stats ;
 }
 
 #endif
+
