@@ -169,7 +169,13 @@ We pass two class objects by reference to avoid expensive copies and an enumerat
 
  In reality what happens is :
 
- _start -> main -> CoinFlipSimulation -> NameOfBettingStrategy -> writeToFile -> plot -> _end
+graph LR
+    A[main.cpp] --> B(CoinFlipSimulation)
+    B --> C{Betting Strategy}
+    C -->|Timid| D[Strategy Logic]
+    C -->|Bold| D
+    D --> E[writeToFile]
+    E --> F[Gnuplot Visualization]
 
  ### The functions writeToFile,plot and the convencience of using gnuplot
 
