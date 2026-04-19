@@ -1,6 +1,8 @@
-# Coin-Flip-Betting-Simulation
+# <p align="center">Coin-Flip-Betting-Simulation <p>
 
+<p align="center">
 <img width="720" height="360" alt="pixil-frame-0 (1)" src="https://github.com/user-attachments/assets/09f6cbca-9f97-4a72-b56a-11b96511631d" />
+<p>
 
 I implemented a simple coin flip betting simulator engine in C++23 
 
