@@ -21,7 +21,7 @@ struct copyof
     double balance { 0.0 } ;
     double goal { 0.0 } ;
     double probability { 0.0 } ;
-    std::vector<double> balanceValues { } ; // Let the compliler handle padding this time -Terry Davis
+    std::vector<double> balanceValues { } ; // Let the compliler handle padding this time 
 
     copyof( const GamblerInfo& Player ) // Public copy constructor
         : bet { Player.getBet() } ,
