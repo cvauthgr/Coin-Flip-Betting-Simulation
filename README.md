@@ -32,15 +32,24 @@ For Windows :
 ```
 
 cd "The files path ex C:\Users\John\Desktop\CoinFlipSimulator"
-cmake -B build -G "MinGW Makefiles"
+Get-Content CMakeLists.txt //Verify that the CMakeLists.txt file you see is the same as the one you downloaded
+(Optional , **run after the first time running the program** ) Remove-Item -Recurse -Force build //Delets any previous build 
+cmake -B build -G "MinGW Makefiles" -DCMAKE_CXX_COMPILER=g++ //Force our compliler to be GCC
 cmake --build build
 build\GarndpasPensionDemolisherStrategies.exe
 
 ```
+>[!Tip]
+>After this you can re-use the last command after making changes to the program to run it without rebuilding it!
 
-For Linux :
+>[!Tip]
+>In monothreading mode sometimes the bold strategy wins or loses in 1 round , dont be scared by the gnuplot warnings and the empty diagram
+>,it just means that it doesnt have more that one data point to plot on the diagram!
+
+For Linux (**Not tested**) :
 
 ```
+
 cd CoinFlipSimulator
 cmake -B build
 cmake --build build
