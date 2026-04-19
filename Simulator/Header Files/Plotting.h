@@ -3,7 +3,7 @@
 
 #include <string>
 
-inline void plot(const std::string& fileName ,const std::string& plotTitle) // C-Style string concatenation (exceptional & this->C)
+inline void plot(const std::string& fileName ,const std::string& plotTitle) // C-Style string concatenation 
 {
     std::string gnuplotCommand = "gnuplot -persistent -e \""
                                  "set object 1 rectangle from screen 0,0 to screen 1,1 fillcolor rgb 'black' behind;"
