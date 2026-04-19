@@ -169,6 +169,7 @@ We pass two class objects by reference to avoid expensive copies and an enumerat
 
  In reality what happens is :
 
+```mermaid
 graph TD
     A[main.cpp] --> B{Program Mode?}
     B -->|MONOTHREADING| C[CoinFlipSimulation]
@@ -185,9 +186,11 @@ graph TD
     
     D --> I[Threaded Strategy Loops]
     I --> J[monteCarloResults Output]
+```
     
 ### The functions writeToFile,plot and the convencience of using gnuplot
 
- In their respecting files `FileHandler.h` and `Plotting.h` we can find (excluding the error handling functions) two new functions which are operating in the background but give us huge side effects 
+In their respecting files `FileHandler.h` and `Plotting.h` we can find (excluding the error handling functions) two new functions which are operating in the background bu
+give us huge side effects 
 
- writeToFile
+writeToFile
