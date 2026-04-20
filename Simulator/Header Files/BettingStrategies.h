@@ -11,6 +11,11 @@
 #include <atomic>
 #include <vector>
 
+std::atomic<double> g_timidTotalEarnings { 0 } ;
+std::atomic<double> g_boldTotalEarnings { 0 } ;
+std::atomic<double> g_martingaleTotalEarnings { 0 } ;
+std::atomic<double> g_randomTotalEarnings { 0 } ;
+
 std::atomic<std::uint64_t> g_timidWins { 0 } ;
 std::atomic<std::uint64_t> g_boldWins { 0 } ;
 std::atomic<std::uint64_t>g_martingaleWins { 0 } ;
@@ -57,9 +62,11 @@ inline SimulationStatististics& timidStrategy( GamblerInfo& Player , SimulationS
 
     #ifdef MULTITHREADING
 
+    g_timidTotalEarnings += playerData.balance ;
+
     if(playerData.balance == playerData.goal) // Only account for succesful simulations where we achieved our goal
     {
-        g_timidWins += stats.winningRounds ;
+        g_timidWins += 1 ;
     }
 
     g_timidTotalRounds += stats.roundsPlayed ;
@@ -113,9 +120,11 @@ inline SimulationStatististics& boldStrategy( GamblerInfo& Player , SimulationSt
 
     #ifdef MULTITHREADING
 
+    g_boldTotalEarnings += playerData.balance ;
+
     if(playerData.balance == playerData.goal)
     {
-        g_boldWins += stats.winningRounds ;
+        g_boldWins += 1 ;
     }
 
     g_boldTotalRounds += stats.roundsPlayed ;
@@ -168,9 +177,11 @@ inline SimulationStatististics& martingaleStrategy( GamblerInfo& Player , Simula
 
     #ifdef MULTITHREADING
 
+    g_martingaleTotalEarnings += playerData.balance ;
+
     if(playerData.balance == playerData.goal)
     {
-        g_martingaleWins += stats.winningRounds ;
+        g_martingaleWins += 1 ;
     }
 
     g_martingaleTotalRounds += stats.roundsPlayed ;
@@ -221,9 +232,11 @@ inline SimulationStatististics& randomBetsStrategy( GamblerInfo& Player , Simula
 
     #ifdef MULTITHREADING
 
+    g_randomTotalEarnings += playerData.balance ;
+
     if(playerData.balance == playerData.goal)
     {
-        g_randomWins += stats.winningRounds ;
+        g_randomWins += 1 ;
     }
 
     g_randomTotalRounds += stats.roundsPlayed ;

@@ -18,7 +18,7 @@ int main()
     #endif
 
     #ifdef MULTITHREADING
-    monteCarloSimulation(100);
+    monteCarloSimulation(1000000);
     monteCarloResults() ;
     #endif
     return 0;
