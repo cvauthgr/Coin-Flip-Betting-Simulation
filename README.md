@@ -358,13 +358,11 @@ A simple `inline void` function that passes a gnuplot command to the system with
 
 Gnuplot is fed the data from the `.txt` file and produces a plot which stays on screen after the program completes. Examples are given below :
 
-**Timid**  <img width="640" height="480" alt="TimidGraph" src="https://github.com/user-attachments/assets/c6426740-4ad5-4633-b63c-40050dcb5800" />
-
-**Bold**  <img width="640" height="480" alt="BoldGraph" src="https://github.com/user-attachments/assets/8b9e472e-abdc-4b99-ba03-d9ebd9c776d1" />
-
-**Martingale <img width="640" height="480" alt="MartingaleGraph" src="https://github.com/user-attachments/assets/e374b761-79f3-4b6b-84de-2ae04cfdeb51" />
-
-**Random Bets** <img width="640" height="480" alt="RandomBetsGraph" src="https://github.com/user-attachments/assets/99645405-8e6a-4acc-9398-d98e12a3eb39" />
+| Timid | Bold |
+|---|---|
+| ![Timid](https://github.com/user-attachments/assets/c6426740-4ad5-4633-b63c-40050dcb5800) | ![Bold](https://github.com/user-attachments/assets/8b9e472e-abdc-4b99-ba03-d9ebd9c776d1) |
+| **Martingale** | **Random Bets** |
+| ![Martingale](https://github.com/user-attachments/assets/e374b761-79f3-4b6b-84de-2ae04cfdeb51) | ![Random Bets](https://github.com/user-attachments/assets/99645405-8e6a-4acc-9398-d98e12a3eb39) |
 
 # The Monte Carlo capabilities of the engine 
 
