@@ -53,8 +53,13 @@ cmake -B build -DCMAKE_CXX_COMPILER=g++
 cmake --build build
 ./build/GarndpasPensionDemolisherStrategies
 ```
+# Features of this program
 
-## What this program does
+- In **single simulation mode**, reports the number of rounds played, rounds won, rounds lost, and final win percentage for the chosen strategy
+- In **Monte Carlo mode**, reports across N independent runs: the simulation win rate (fraction of runs where the player reached their goal), the average expected return E[X], and the expected net loss E[L] as a percentage of starting capital
+- Visualizes the balance progression of a single simulation run as a plot via gnuplot
+
+## What this program does( On a technical level)
 
 `For anyone wondering, no, this program won't help you become a millionaire by backtesting your favorite coin flip gambling strategy`
 
@@ -351,7 +356,15 @@ A simple `inline void` function that passes a gnuplot command to the system with
 
 `The usefulness of gnuplot can only be appreciated after trying to set up ImPlot for one of your projects`
 
-Gnuplot is fed the data from the `.txt` file and produces a plot which stays on screen after the program completes.
+Gnuplot is fed the data from the `.txt` file and produces a plot which stays on screen after the program completes. Examples are given below :
+
+**Timid**  <img width="640" height="480" alt="TimidGraph" src="https://github.com/user-attachments/assets/c6426740-4ad5-4633-b63c-40050dcb5800" />
+
+**Bold**  <img width="640" height="480" alt="BoldGraph" src="https://github.com/user-attachments/assets/8b9e472e-abdc-4b99-ba03-d9ebd9c776d1" />
+
+**Martingale <img width="640" height="480" alt="MartingaleGraph" src="https://github.com/user-attachments/assets/e374b761-79f3-4b6b-84de-2ae04cfdeb51" />
+
+**Random Bets** <img width="640" height="480" alt="RandomBetsGraph" src="https://github.com/user-attachments/assets/99645405-8e6a-4acc-9398-d98e12a3eb39" />
 
 # The Monte Carlo capabilities of the engine 
 
