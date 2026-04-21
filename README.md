@@ -255,14 +255,15 @@ inline GamblerInfo MartinGaleStrategyPlayer { 50 , 0.5 , 1 , 150 } ;
 inline GamblerInfo ForgetfulStrategyPlayer { 50 , 0.5 , 1 , 150 } ;
 ```
 
-This returns :
+This returns (with the new features added) :
 
 ```
-Timid strategy with a win rate of 24.0952
-Bold strategy with a win rate of 38.7003
-Martingale strategy with a win rate of 31.2709
-Random strategy with a win rate of 23.1025
+Timid strategy with a win rate of 0.138656% with an expected return value of E[X] = 0.207984$ and an expected total net loss E[L] = 95.8403%
+Bold strategy with a win rate of 3.50431% with an expected return value of E[X] = 5.25646$ and an expected total net loss E[L] = -5.12924%
+Martingale strategy with a win rate of 0.312745% with an expected return value of E[X] = 0.469117$ and an expected total net loss E[L] = 90.6177%
+Random strategy with a win rate of 0.138657% with an expected return value of E[X] = 0.207986$ and an expected total net loss E[L] = 95.8403%
 ```
+(100 million monte carlo walks with player edge took aproximatelly 15min to run)
 
 # The `CoinFlipSimulation` function
 
