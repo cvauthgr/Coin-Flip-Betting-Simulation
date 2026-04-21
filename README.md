@@ -102,7 +102,7 @@ In the file `BettingStrategies.h` I have implemented 4 betting strategies the us
 
 1) **Timid** : The timid strategy bets the same fixed amount each round regardless of outcome until either it achieves its goal or bankrupts the player
 2) **Bold** : The bold strategy bets the entire balance if the player's balance is less than half of the goal, and bets the exact amount needed to hit the goal if the balance exceeds half of the goal
-3) **Martingale** : This strategy relies on the simple technique of doubling the bet after every loss, hoping for a big win. I implemented it with a twist — if the player is on a consecutive loss streak and cannot double their bet due to insufficient funds, the program goes all in, either letting them continue playing or bankrupting them in a single bet
+3) **Martingale** : This strategy relies on the simple technique of doubling the bet after every loss, hoping for a big win. I implemented it with a twist , if the player is on a consecutive loss streak and cannot double their bet due to insufficient funds, the program goes all in, either letting them continue playing or bankrupting them in a single bet
 4) **RandomBets** : This is the one strategy I had the most fun implementing. The idea behind it is very simple. The gambler has one too many shots of tequila (or something stronger) before starting to play. So now the only thing they remember is how much they need to win. Every round they bet a random amount. Thankfully one of their friends is there reminding them of the possible bets they can make, so they don't bet more than they have or leave before hitting their goal. Thank you friend!
 
 ## The `RandomGen.h` file 
@@ -119,7 +119,7 @@ inline T getReal(T min , T max)
 
 This inline function template is vital for the execution of our simulations
 
--> `inline` on a function template ensures that even if the definition appears in multiple translation units, the linker treats them as one — avoiding ODR violations when the header is included in multiple places.
+-> `inline` on a function template ensures that even if the definition appears in multiple translation units, the linker treats them as one , avoiding ODR violations when the header is included in multiple places.
 
 -> Using the template we can input arguments of the same floating point data type (only tested for floating point fundamental data types [C++ Fundamental Data Types](https://en.cppreference.com/cpp/language/types)) in a logical order and receive a pseudorandom 64 bit number in the interval [a, b). We use the pseudorandom number generator Mersenne Twister [C++ Mersenne Twister](https://en.cppreference.com/cpp/numeric/random/mersenne_twister_engine), which is seeded once per thread when the `thread_local` variable `mt` is initialized using a `std::random_device` number from the OS [Pseudorandom Numbers Coming From The OS](https://en.cppreference.com/cpp/numeric/random/random_device). Cppreference gives a very good example on that exact thing.
 
@@ -202,7 +202,7 @@ inline GamblerInfo MartingaleStrategyPlayer { 100 , 0.51 , 25 , 1000 } ;
 ```
 
 >[!WARNING]
->Do not initialize a new class object — just change the existing values of the simulation object you want to configure, found in the `CasesInfo.h` header file
+>Do not initialize a new class object , just change the existing values of the simulation object you want to configure, found in the `CasesInfo.h` header file
 
 ## Step 2 : Calling your desired betting strategy simulation
 
@@ -273,7 +273,7 @@ We can pass 3 arguments :
 2) The betting method we want to simulate
 3) The struct that receives the results of our simulation
 
-On the more technical side : `inline SimulationStatististics& CoinFlipSimulation( GamblerInfo& Player , BettingMethod method , SimulationStatististics& stats)` — this is our simulator in its true form.
+On the more technical side : `inline SimulationStatististics& CoinFlipSimulation( GamblerInfo& Player , BettingMethod method , SimulationStatististics& stats)` ,this is our simulator in its true form.
 
 We pass two objects by reference to avoid expensive copies and an enumerator from an enum class (located in `Enum.h`) to select which betting strategy function to call.
 
@@ -369,7 +369,7 @@ Gnuplot is fed the data from the `.txt` file and produces a plot which stays on 
 Inside `MonteCarloWalks.h` we find the function `monteCarloSimulation()` which takes a single `std::uint64_t` argument representing the desired number of iterations.
 
 >[!IMPORTANT]
->The number of iterations is not per strategy — it affects all strategies simultaneously
+>The number of iterations is not per strategy , it affects all strategies simultaneously
 
 Example : if in main we call
 
@@ -427,6 +427,6 @@ Also extremely important is the use of `std::atomic` on the global variables tha
 
 # The betting strategy functions 
 
-Inside `BettingStrategies.h` exist our betting strategy functions — take note of this location as it will become useful later.
+Inside `BettingStrategies.h` exist our betting strategy functions - take note of this location as it will become useful later.
 
 # How to add YOUR OWN strategies (In construction)
