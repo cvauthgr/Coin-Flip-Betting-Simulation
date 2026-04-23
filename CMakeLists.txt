@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(GarndpasPensionDemolisherStrategies LANGUAGES CXX)
+project(SimulatorStrategies LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(GarndpasPensionDemolisherStrategies main.cpp
+add_executable(SimulatorStrategies main.cpp
     RandomGen.h
     FileHandler.h
     Plotting.h
@@ -23,10 +23,10 @@ add_executable(GarndpasPensionDemolisherStrategies main.cpp
 
 )
 
-target_compile_options(GarndpasPensionDemolisherStrategies PRIVATE -O3)
+target_compile_options(SimulatorStrategies PRIVATE -O3)
 
 include(GNUInstallDirs)
-install(TARGETS GarndpasPensionDemolisherStrategies
+install(TARGETS SimulatorStrategies
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
