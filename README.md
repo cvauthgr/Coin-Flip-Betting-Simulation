@@ -36,7 +36,7 @@ cd "The file path e.g. C:\Users\John\Desktop\CoinFlipSimulator"
 Get-Content CMakeLists.txt
 cmake -B build -G "MinGW Makefiles" -DCMAKE_CXX_COMPILER=g++
 cmake --build build
-build\GarndpasPensionDemolisherStrategies.exe
+build\SimulatorStrategies.exe
 ```
 
 >[!TIP]
@@ -51,7 +51,7 @@ For Linux (**Not tested**, compiler flag may differ) :
 cd CoinFlipSimulator
 cmake -B build -DCMAKE_CXX_COMPILER=g++
 cmake --build build
-./build/GarndpasPensionDemolisherStrategies
+./build/SimulatorStrategies
 ```
 # Features of this program
 
