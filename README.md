@@ -17,7 +17,7 @@ Step 2 : Inside this folder put all the `.h` files and the `.cpp` file
 
 Step 3 : Inside `CoinFlipSimulator` put the `CMakeLists.txt` file provided
 
-Step 4 : Install GCC (Well good luck with that) [Tutorial on installing GCC](https://phoenixnap.com/kb/install-gcc-windows)
+Step 4 : Install GCC [Tutorial on installing GCC](https://phoenixnap.com/kb/install-gcc-windows)
 
 Step 5 : Install Gnuplot [Tutorial on installing Gnuplot](https://riptutorial.com/gnuplot/example/11275/installation-or-setup)
 
@@ -66,7 +66,7 @@ cmake --build build
 At its core the program is fairly simple and has two modes 
 
 1) Mode 1 : Monothreading
-2) Mode 2 : Multithreading (` Take that GIL `)
+2) Mode 2 : Multithreading 
 
 ### How to switch between modes 
 
@@ -277,8 +277,6 @@ We can pass 3 arguments :
 On the more technical side : `inline SimulationStatististics& CoinFlipSimulation( GamblerInfo& Player , BettingMethod method , SimulationStatististics& stats)` ,this is our simulator in its true form.
 
 We pass two objects by reference to avoid expensive copies and an enumerator from an enum class (located in `Enum.h`) to select which betting strategy function to call.
-
-`Python devs in shambles right now (joke!!!) ` 
 
 In reality what happens is :
 
