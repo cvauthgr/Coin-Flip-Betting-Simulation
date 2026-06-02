@@ -26,6 +26,11 @@ std::atomic<std::uint64_t> g_boldTotalRounds { 0 } ;
 std::atomic<std::uint64_t> g_martingaleTotalRounds { 0 } ;
 std::atomic<std::uint64_t> g_randomTotalRounds { 0 } ;
 
+std::atomic<std::uint64_t> g_timidTotalSimulations { 0 } ;
+std::atomic<std::uint64_t> g_boldTotalSimulations { 0 } ;
+std::atomic<std::uint64_t> g_martingaleTotalSimulations { 0 } ;
+std::atomic<std::uint64_t> g_randomTotalSimulations { 0 } ;
+
 inline SimulationStatististics& timidStrategy( GamblerInfo& Player , SimulationStatististics& stats )
 {
     copyof playerData { Player } ;
@@ -64,12 +69,13 @@ inline SimulationStatististics& timidStrategy( GamblerInfo& Player , SimulationS
 
     g_timidTotalEarnings += playerData.balance ;
 
-    if(playerData.balance == playerData.goal) // Only account for succesful simulations where we achieved our goal
+    if(playerData.balance >= playerData.goal) // Only account for succesful simulations where we achieved our goal
     {
         g_timidWins += 1 ;
     }
 
     g_timidTotalRounds += stats.roundsPlayed ;
+    g_timidTotalSimulations += 1 ;
 
     #endif
 
@@ -122,12 +128,13 @@ inline SimulationStatististics& boldStrategy( GamblerInfo& Player , SimulationSt
 
     g_boldTotalEarnings += playerData.balance ;
 
-    if(playerData.balance == playerData.goal)
+    if(playerData.balance >= playerData.goal)
     {
         g_boldWins += 1 ;
     }
 
     g_boldTotalRounds += stats.roundsPlayed ;
+    g_boldTotalSimulations += 1 ;
 
     #endif
 
@@ -179,12 +186,13 @@ inline SimulationStatististics& martingaleStrategy( GamblerInfo& Player , Simula
 
     g_martingaleTotalEarnings += playerData.balance ;
 
-    if(playerData.balance == playerData.goal)
+    if(playerData.balance >= playerData.goal)
     {
         g_martingaleWins += 1 ;
     }
 
     g_martingaleTotalRounds += stats.roundsPlayed ;
+    g_martingaleTotalSimulations += 1 ;
 
     #endif
 
@@ -234,12 +242,13 @@ inline SimulationStatististics& randomBetsStrategy( GamblerInfo& Player , Simula
 
     g_randomTotalEarnings += playerData.balance ;
 
-    if(playerData.balance == playerData.goal)
+    if(playerData.balance >= playerData.goal)
     {
         g_randomWins += 1 ;
     }
 
     g_randomTotalRounds += stats.roundsPlayed ;
+    g_randomTotalSimulations += 1 ;
 
     #endif
 
