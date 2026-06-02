@@ -10,6 +10,8 @@
 
 inline void monteCarloSimulation( std::uint64_t numberOfSimulations )
 {
+    unsigned int numberOfThreads = std::thread::hardware_concurrency() ; // Get the number of threads in the specific machine
+
     auto callTimid = []( std::uint64_t numberOfSimulations )
     {
         for( std::uint64_t index = 0 ; index < numberOfSimulations ; ++ index)
@@ -43,22 +45,21 @@ inline void monteCarloSimulation( std::uint64_t numberOfSimulations )
         }
     };
 
-    std::jthread Timid1( callTimid , numberOfSimulations / 4 ) ;
-    std::jthread Timid2( callTimid , numberOfSimulations / 4 ) ;
-    std::jthread Timid3( callTimid , numberOfSimulations / 4 ) ;
-    std::jthread Timid4( callTimid , numberOfSimulations / 4 ) ;
-    std::jthread Bold1( callBold , numberOfSimulations / 4 ) ;
-    std::jthread Bold2( callBold , numberOfSimulations / 4 ) ;
-    std::jthread Bold3( callBold , numberOfSimulations / 4 ) ;
-    std::jthread Bold4( callBold , numberOfSimulations / 4 ) ;
-    std::jthread Martingale1( callMartingale , numberOfSimulations / 4 ) ;
-    std::jthread Martingale2( callMartingale , numberOfSimulations / 4 ) ;
-    std::jthread Martingale3( callMartingale , numberOfSimulations / 4 ) ;
-    std::jthread Martingale4( callMartingale , numberOfSimulations / 4 ) ;
-    std::jthread Random1( callRandom , numberOfSimulations / 4 ) ;
-    std::jthread Random2( callRandom , numberOfSimulations / 4 ) ;
-    std::jthread Random3( callRandom , numberOfSimulations / 4 ) ;
-    std::jthread Random4( callRandom , numberOfSimulations / 4 ) ;
+    unsigned int numberOfIterationsPerThread = numberOfSimulations / numberOfThreads ;
+
+    std::vector<std::jthread> workerThreads { } ;
+    workerThreads.reserve(numberOfThreads) ;
+
+    //Push the needed number of threads in the vector , analogous to the thread counter ; ( All modern machines have an even amount of threads > 4 )
+
+    for( unsigned int index = 0 ; index < numberOfThreads / 4 ; ++ index )
+    {
+        workerThreads.emplace_back(callTimid , numberOfIterationsPerThread ) ;
+        workerThreads.emplace_back(callBold , numberOfIterationsPerThread) ;
+        workerThreads.emplace_back(callMartingale , numberOfIterationsPerThread) ;
+        workerThreads.emplace_back(callRandom , numberOfIterationsPerThread) ;
+    }
+
 
 }
 
