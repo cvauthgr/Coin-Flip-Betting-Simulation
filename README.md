@@ -1,5 +1,8 @@
 # <p align="center">Coin-Flip-Betting-Simulation <p>
-
+![C++23](https://img.shields.io/badge/C%2B%2B23-00599C?logo=cplusplus&logoColor=white)
+![gnuplot](https://img.shields.io/badge/gnuplot-white?logo=gnuplot&logoColor=black)
+![CMake](https://img.shields.io/badge/CMake-064F8C?logo=cmake&logoColor=white)
+![GCC](https://img.shields.io/badge/GCC-4EAA25)
 <p align="center">
 <img width="720" height="360" alt="pixil-frame-0 (1)" src="https://github.com/user-attachments/assets/09f6cbca-9f97-4a72-b56a-11b96511631d" />
 <p>
